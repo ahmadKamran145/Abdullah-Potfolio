@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Critical CSS for above-the-fold content - COPIED FROM CROSSCHECK */
+.hero-height {
+  overflow: hidden;
+  position: relative;
+}
+
+.aurora-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 150%;
+  z-index: 1;
+  /* Was -100000000 in source, but we need it behind content but visible */
+  pointer-events: none;
+  background: radial-gradient(circle,
+      rgba(10, 10, 10, 0.9) 0%,
+      rgba(0, 0, 0, 1) 100%);
+}
+
+/* Ensure the canvas is behind the radial gradient or blended? */
+/* In source: .aurora-container canvas { mix-blend-mode: screen; } */
+.aurora-container canvas {
+  mix-blend-mode: screen;
+}
+
+.font-class {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* NAVBAR STYLES FROM CROSSCHECK */
+.tab-wrapper {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  gap: 0px;
+
+  /* width: 500px; - Modified to be auto/fit content if needed, but original fixed 500px is likely what user wants for exact match */
+  width: 500px;
+  margin: 0 auto;
+}
+
+.tab-item {
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 9999px;
+  padding: 2px;
+  flex: 1;
+}
+
+.tab-item.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(to right, #658aff, #a855f7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.tab-button {
+  width: 100%;
+  /* height: 48px; */
+  padding: 16px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.tab-item.active .tab-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: transparent;
+    border-radius: 9999px;
+    gap: 8px;
+    /* padding: 4px; */
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .tab-item {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 9999px;
+    padding: 2px;
+    flex: 1;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    width: 100%;
+    height: 48px;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+    padding: 0 20px;
+  }
+}
+
+
+/* Animations from parent project */
+@layer base {
+  @property --pos-x {
+    syntax: '<percentage>';
+    initial-value: 11.14%;
+    inherits: false;
+  }
+
+  @property --pos-y {
+    syntax: '<percentage>';
+    initial-value: 140%;
+    inherits: false;
+  }
+
+  @property --spread-x {
+    syntax: '<percentage>';
+    initial-value: 150%;
+    inherits: false;
+  }
+
+  @property --spread-y {
+    syntax: '<percentage>';
+    initial-value: 180.06%;
+    inherits: false;
+  }
+
+  @property --color-1 {
+    syntax: '<color>';
+    initial-value: #000;
+    inherits: false;
+  }
+
+  @property --color-2 {
+    syntax: '<color>';
+    initial-value: #16123ce5;
+    inherits: false;
+  }
+
+  @property --color-3 {
+    syntax: '<color>';
+    initial-value: #16123ce5;
+    inherits: false;
+  }
+
+  @property --color-4 {
+    syntax: '<color>';
+    initial-value: #16123ce5;
+    inherits: false;
+  }
+
+  @property --color-5 {
+    syntax: '<color>';
+    initial-value: #16123ce5;
+    inherits: false;
+  }
+
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 20deg;
+    inherits: true;
+  }
+
+  @property --border-color-1 {
+    syntax: '<color>';
+    initial-value: hsla(270, 75%, 60%, 0.2);
+    inherits: true;
+  }
+
+  @property --border-color-2 {
+    syntax: '<color>';
+    initial-value: hsla(270, 75%, 40%, 0.75);
+    inherits: true;
+  }
+
+  @property --stop-1 {
+    syntax: '<percentage>';
+    initial-value: 37.35%;
+    inherits: false;
+  }
+
+  @property --stop-2 {
+    syntax: '<percentage>';
+    initial-value: 61.36%;
+    inherits: false;
+  }
+
+  @property --stop-3 {
+    syntax: '<percentage>';
+    initial-value: 78.42%;
+    inherits: false;
+  }
+
+  @property --stop-4 {
+    syntax: '<percentage>';
+    initial-value: 89.52%;
+    inherits: false;
+  }
+
+  @property --stop-5 {
+    syntax: '<percentage>';
+    initial-value: 100%;
+    inherits: false;
+  }
+}
+
+@layer components {
+  .gradient-button {
+    @apply relative appearance-none cursor-pointer;
+    background: radial-gradient(var(--spread-x) var(--spread-y) at var(--pos-x) var(--pos-y),
+        var(--color-1) var(--stop-1),
+        var(--color-2) var(--stop-2),
+        var(--color-3) var(--stop-3),
+        var(--color-4) var(--stop-4),
+        var(--color-5) var(--stop-5));
+    transition: all 0.5s;
+  }
+
+  .gradient-button:hover {
+    --pos-x: 0%;
+    --pos-y: 91.51%;
+    --spread-x: 120.24%;
+    --spread-y: 103.18%;
+    /* Colors from original code */
+    --color-1: #1a0b2e;
+    --color-2: #772a79;
+    --color-3: #2d2daf;
+    --color-4: #37140a;
+    --color-5: #000;
+  }
+}
+
+/* Custom Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes spin-smooth {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-smooth {
+  animation: spin-smooth 3s linear infinite;
+}
