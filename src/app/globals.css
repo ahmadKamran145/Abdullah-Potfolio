@@ -72,7 +72,7 @@ body {
   gap: 0px;
 
   /* width: 500px; - Modified to be auto/fit content if needed, but original fixed 500px is likely what user wants for exact match */
-  width: 500px;
+  width: 650px;
   margin: 0 auto;
 }
 
