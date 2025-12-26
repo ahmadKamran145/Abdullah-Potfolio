@@ -9,8 +9,10 @@ import AnimatedButton from './ui/animated-button';
 
 const tabs: Tab[] = [
     { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
     { id: 'about', label: 'About' },
+    { id: 'faq', label: 'FAQs' },
     { id: 'contact', label: 'Contact' },
 ];
 
