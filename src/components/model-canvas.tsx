@@ -122,6 +122,7 @@ function ConnectionLine({
     const lineColor = index % 2 === 0 ? colors.primary : colors.secondary;
 
     return (
+        // @ts-ignore
         <line ref={lineRef} geometry={geometry}>
             <lineBasicMaterial color={lineColor} transparent opacity={0.6} />
         </line>
