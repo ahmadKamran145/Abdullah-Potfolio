@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, ArrowRight, Star, Volume2, VolumeX } from "lucide-react";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,49 +11,43 @@ gsap.registerPlugin(ScrollTrigger);
 const slides = [
     {
         id: 1,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop",
         video: "/slider6.mp4",
         title: "Creative Direction",
         subtitle: "Visual storytelling",
     },
     {
         id: 2,
-        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop",
         video: "/slider2.mp4",
         title: "Hico: Velvet Dreams",
         subtitle: "Cinematic Product Reveal",
     },
     {
         id: 3,
-        image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop",
         video: "/slider3.mp4",
         title: "Scent & Stories: Essence",
         subtitle: "Luxury Fragrance Campaign",
     },
     {
         id: 4,
-        image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200&auto=format&fit=crop",
         video: "/slider4.mp4",
         title: "Harmony: Visual Symphony",
         subtitle: "Cinematic Music Experience",
     },
     {
         id: 5,
-        image: "https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d?q=80&w=1200&auto=format&fit=crop",
         video: "/slider5.mp4",
         title: "Midnight Vibe: The Edit",
         subtitle: "Dynamic Visual Flow",
     },
     {
         id: 6,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop",
         video: "/slider.mp4",
         title: "Zero Lifestyle Watch",
         subtitle: "Commercial Advertisement",
     },
 ];
 // Video Slide Component with auto-play/pause logic
-function VideoSlide({ video, image, isActive, shouldReset }: { video: string; image: string; isActive: boolean; shouldReset: boolean }) {
+function VideoSlide({ video, isActive, shouldReset }: { video: string; isActive: boolean; shouldReset: boolean }) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isMuted, setIsMuted] = useState(true);
     const [isInView, setIsInView] = useState(false);
@@ -100,7 +93,7 @@ function VideoSlide({ video, image, isActive, shouldReset }: { video: string; im
                 muted={isMuted}
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
-                poster={image}
+                suppressHydrationWarning
             >
                 <source src={video} type="video/mp4" />
             </video>
@@ -241,23 +234,11 @@ export function ShowcaseSlider() {
                                         : "border-white/5 opacity-50 scale-95"
                                         }`}
                                 >
-                                    {slide.video ? (
-                                        <VideoSlide
-                                            video={slide.video}
-                                            image={slide.image}
-                                            isActive={isActive}
-                                            shouldReset={Math.abs(index - currentIndex) >= 2}
-                                        />
-                                    ) : (
-                                        <Image
-                                            src={slide.image}
-                                            alt={slide.title}
-                                            fill
-                                            className="object-cover"
-                                            sizes="60vw"
-                                            priority={index <= 2}
-                                        />
-                                    )}
+                                    <VideoSlide
+                                        video={slide.video}
+                                        isActive={isActive}
+                                        shouldReset={Math.abs(index - currentIndex) >= 2}
+                                    />
 
                                     {/* Overlay gradient for inactive slides */}
                                     <div

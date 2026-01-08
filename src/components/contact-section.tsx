@@ -205,19 +205,19 @@ export function ContactSection() {
                             {
                                 icon: Phone,
                                 label: "Phone",
-                                value: "+92 300 1234567",
+                                value: "+92 305 5513124",
                                 gradient: "from-[#658aff] to-[#a855f7]"
                             },
                             {
                                 icon: Mail,
                                 label: "Email",
-                                value: "hello@abdullahstudio.pk",
+                                value: "flokstudioglobal@gmail.com",
                                 gradient: "from-[#a855f7] to-[#ec4899]"
                             },
                             {
                                 icon: MapPin,
                                 label: "Location",
-                                value: "Islamabad, Pakistan",
+                                value: "Office # 23, 3rd Floor, Twin City Plaza, I-8 Markaz, Islamabad",
                                 gradient: "from-[#00DAF4] to-[#5EDC99]"
                             },
                         ].map((item, i) => (
