@@ -92,7 +92,15 @@ const Hero = () => {
                             {/* Abstract Composition representing 'Portfolio' */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/40 to-blue-900/40 rounded-3xl border border-white/10 backdrop-blur-sm p-4 transform rotate-3 hover:rotate-0 transition-all duration-700 ease-out">
                                 <div className="w-full h-full bg-black/50 rounded-2xl flex items-center justify-center overflow-hidden relative">
-                                    <div className="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2942&auto=format&fit=crop')] bg-cover bg-center"></div>
+                                    <video
+                                        src="/slider6.mp4"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                                        suppressHydrationWarning
+                                    />
                                     <Video className="w-24 h-24 text-white/20" />
                                     <div className="absolute bottom-4 left-4 right-4 flex gap-2">
                                         <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
