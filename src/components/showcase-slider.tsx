@@ -116,15 +116,41 @@ export function ShowcaseSlider() {
     const sectionRef = useRef<HTMLElement>(null);
     const isAnimating = useRef(false);
 
-    // Calculate offset to center the active slide (showing 30% of sides)
+    const [containerWidth, setContainerWidth] = useState(0);
+
+    // Update container width on resize
+    useEffect(() => {
+        const updateWidth = () => {
+            if (slidesContainerRef.current) {
+                setContainerWidth(slidesContainerRef.current.offsetWidth);
+            }
+        };
+
+        // Initial update
+        updateWidth();
+
+        window.addEventListener('resize', updateWidth);
+        return () => window.removeEventListener('resize', updateWidth);
+    }, []);
+
+    // Calculate offset to center the active slide
     const getTranslateX = (index: number) => {
-        // Each slide is 60% width, we want to show 20% on each side
-        // Center slide position: 50% - 30% (half of slide width) = 20%
-        // But we need to account for the gap and positioning
-        const slideWidth = 60; // percentage
-        const gap = 2; // percentage gap between slides
-        const offset = 20; // starting offset to center first slide
-        return -(index * (slideWidth + gap)) + offset;
+        if (!containerWidth) return 0;
+
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        const slideWidth = isMobile ? 280 : 320;
+        const gap = 20; // 20px gap
+
+        // Calculate the center position
+        // Container center = containerWidth / 2
+        // Slide center from left = (index * (slideWidth + gap)) + (slideWidth / 2)
+        // We want Slide center to be at Container center
+        // Translation = Container Center - Slide Center (relative to track start)
+
+        const centerOffset = (containerWidth / 2) - (slideWidth / 2);
+        const slidePosition = index * (slideWidth + gap);
+
+        return -slidePosition + centerOffset;
     };
 
     const goToSlide = (index: number) => {
@@ -135,9 +161,9 @@ export function ShowcaseSlider() {
 
         // Animate the slider with GSAP
         gsap.to(slidesContainerRef.current, {
-            x: `${getTranslateX(newIndex)}%`,
-            duration: 0.8,
-            ease: "power3.inOut",
+            x: getTranslateX(newIndex), // Value in pixels
+            duration: 1.0,
+            ease: "power2.inOut",
             onComplete: () => {
                 isAnimating.current = false;
             },
@@ -147,7 +173,7 @@ export function ShowcaseSlider() {
         gsap.fromTo(
             ".slide-info",
             { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", delay: 0.2 }
+            { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.3 }
         );
 
         setCurrentIndex(newIndex);
@@ -156,14 +182,18 @@ export function ShowcaseSlider() {
     const nextSlide = () => goToSlide(currentIndex + 1);
     const prevSlide = () => goToSlide(currentIndex - 1);
 
+    // Update position when container width changes or on mount
     useEffect(() => {
-        // Set initial position
-        if (slidesContainerRef.current) {
+        // Only run if not currently animating (to avoid overwriting GSAP tween)
+        if (slidesContainerRef.current && containerWidth > 0 && !isAnimating.current) {
             gsap.set(slidesContainerRef.current, {
-                x: `${getTranslateX(0)}%`,
+                x: getTranslateX(currentIndex),
             });
         }
+    }, [containerWidth, currentIndex]);
 
+    useEffect(() => {
+        // Initial setup for scroll trigger context
         const ctx = gsap.context(() => {
             // Section entrance animation
             gsap.fromTo(
@@ -213,25 +243,28 @@ export function ShowcaseSlider() {
             </div>
 
             {/* Full-width Slider Container */}
-            <div className="relative w-full overflow-hidden">
+            <div className="relative w-full overflow-hidden min-h-[600px] flex items-center justify-center">
                 {/* Slides Container */}
                 <div
                     ref={slidesContainerRef}
-                    className="flex"
-                    style={{ gap: "2%" }}
+                    className="flex items-center"
+                    style={{ gap: "20px" }}
                 >
                     {slides.map((slide, index) => {
                         const isActive = index === currentIndex;
                         return (
                             <div
                                 key={slide.id}
-                                className="flex-shrink-0 transition-all duration-500"
-                                style={{ width: "60%" }}
+                                className="flex-shrink-0 transition-all duration-700 ease-in-out"
+                                style={{
+                                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? "280px" : "320px",
+                                    height: typeof window !== 'undefined' && window.innerWidth < 768 ? "500px" : "580px"
+                                }}
                             >
                                 <div
-                                    className={`relative aspect-[16/10] rounded-2xl overflow-hidden border transition-all duration-500 ${isActive
-                                        ? "border-white/20 shadow-[0_0_60px_rgba(101,138,255,0.2)] scale-100"
-                                        : "border-white/5 opacity-50 scale-95"
+                                    className={`relative w-full h-full rounded-2xl overflow-hidden border transition-all duration-700 ease-in-out ${isActive
+                                        ? "border-white/20 shadow-[0_0_60px_rgba(101,138,255,0.2)] scale-100 opacity-100"
+                                        : "border-white/5 opacity-50 scale-90"
                                         }`}
                                 >
                                     <VideoSlide
@@ -245,17 +278,6 @@ export function ShowcaseSlider() {
                                         className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${isActive ? "opacity-0" : "opacity-100"
                                             }`}
                                     />
-
-                                    {/* Active slide overlay with corner decorations */}
-                                    {isActive && (
-                                        <>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                                            <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/40" />
-                                            <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/40" />
-                                            <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-white/40" />
-                                            <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-white/40" />
-                                        </>
-                                    )}
                                 </div>
                             </div>
                         );
