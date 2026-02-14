@@ -31,27 +31,16 @@ const Hero = () => {
                         <div className="text-start sm:text-left relative z-10">
                             <h1 className="font-outfit font-thin flex lg:flex-row flex-col items-start lg:items-end lg:text-[100px] xl:text-[120px] text-white leading-tight">
                                 <span className="not-italic font-thin text-[40px] md:text-[50px] lg:text-[65px] xl:text-[100px] font-class opacity-90">
-                                    From{' '}
+                                    Here To{' '}
                                 </span>
                                 <div className="relative inline-block ml-0 lg:ml-4">
-                                    {/* Selection Frame Mimic */}
-                                    <div className="absolute -inset-2 border-2 border-dashed border-purple-500 rounded-lg opacity-60"></div>
-                                    <div className="absolute -top-3 -left-3 w-2 h-2 border border-purple-500 bg-transparent"></div>
-                                    <div className="absolute -top-3 -right-3 w-2 h-2 border border-purple-500 bg-transparent"></div>
-                                    <div className="absolute -bottom-3 -left-3 w-2 h-2 border border-purple-500 bg-transparent"></div>
-                                    <div className="absolute -bottom-3 -right-3 w-2 h-2 border border-purple-500 bg-transparent"></div>
+
 
                                     <span className="font-class font-[700] text-[56px] lg:text-[65px] xl:text-[110px] text-white relative z-10 px-2">
-                                        Vision to Reality
+                                        Create
                                     </span>
                                 </div>
                             </h1>
-                            <div className="flex items-center gap-4 mt-2 lg:-mt-4">
-                                <h2 className="bg-gradient-to-r from-[#00DAF4] to-[#5EDC99] bg-clip-text text-transparent font-class text-[30px] sm:text-[50px] lg:text-[65px] xl:text-[100px] font-semibold leading-tight">
-                                    Capturing Moments
-                                </h2>
-                                <Star className="text-[#5EDC99] w-8 h-8 lg:w-16 lg:h-16 animate-pulse hidden lg:block" fill="currentColor" />
-                            </div>
                         </div>
 
                         {/* Description */}
@@ -72,8 +61,8 @@ const Hero = () => {
                     </div>
 
                     {/* Stats & Image Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 w-full items-end gap-12 mt-12 lg:mt-24 relative">
-                        <div className="order-2 lg:order-1 pb-10 flex gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 w-full items-center gap-12 mt-12 lg:mt-24 relative">
+                        <div className="order-2 lg:order-1 flex gap-12">
                             <div className="text-left">
                                 <div className="flex items-start">
                                     <div className="text-white text-[40px] lg:text-[50px] font-bold">500</div>
@@ -88,9 +77,9 @@ const Hero = () => {
                         </div>
 
                         {/* Hero Image / Mockup Area */}
-                        <div className="order-1 lg:order-2 w-full relative h-[300px] lg:h-[500px]">
+                        <div className="order-1 lg:order-2 w-full relative flex justify-center lg:justify-end">
                             {/* Abstract Composition representing 'Portfolio' */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/40 to-blue-900/40 rounded-3xl border border-white/10 backdrop-blur-sm p-4 transform rotate-3 hover:rotate-0 transition-all duration-700 ease-out">
+                            <div className="relative w-[280px] h-[500px] lg:w-[320px] lg:h-[580px] bg-gradient-to-tr from-purple-900/40 to-blue-900/40 rounded-3xl border border-white/10 backdrop-blur-sm p-4 transition-all duration-700 ease-out">
                                 <div className="w-full h-full bg-black/50 rounded-2xl flex items-center justify-center overflow-hidden relative">
                                     <video
                                         src="/slider6.mp4"
@@ -98,20 +87,16 @@ const Hero = () => {
                                         loop
                                         muted
                                         playsInline
-                                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                                        className="absolute inset-0 w-full h-full object-cover"
                                         suppressHydrationWarning
                                     />
-                                    <Video className="w-24 h-24 text-white/20" />
+
                                     <div className="absolute bottom-4 left-4 right-4 flex gap-2">
                                         <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
                                             <div className="h-full w-2/3 bg-gradient-to-r from-blue-500 to-purple-500"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {/* Floating Elements */}
-                            <div className="absolute -top-12 -right-12 p-4 bg-black/80 backdrop-blur-md rounded-2xl border border-white/10 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                                <Camera className="w-8 h-8 text-purple-500" />
                             </div>
                         </div>
                     </div>
