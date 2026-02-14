@@ -31,20 +31,20 @@ export function ContactSection() {
                 }
             );
 
-            // Form animation
+            // Form fields stagger animation
             gsap.fromTo(
-                formRef.current,
-                { y: 50, opacity: 0, scale: 0.95 },
+                formRef.current?.querySelectorAll("input, select, textarea, .form-submit") || [],
+                { y: 30, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
-                    scale: 1,
-                    duration: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 80%",
-                        toggleActions: "play reverse play reverse",
+                        start: "top 70%",
+                        toggleActions: "play none none reverse",
                     },
                 }
             );
@@ -184,7 +184,7 @@ export function ContactSection() {
                             </div>
 
                             {/* Submit Button with gradient border animation */}
-                            <div className="pt-2">
+                            <div className="pt-2 form-submit">
                                 <div className="group relative rounded-full p-[2px] overflow-hidden inline-block">
                                     <div className="absolute inset-0 animate-spin-smooth [background:conic-gradient(from_0deg_at_50%_50%,#1A0B2E_0%,#4B0082_15%,#3A29FF_25%,#00DAF4_35%,#1A0B2E_50%,#1A0B2E_100%)]" />
                                     <button

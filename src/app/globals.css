@@ -24,6 +24,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Pin spacer fix for GSAP */
+.pin-spacer {
+  overflow: visible !important;
+}
+
 /* Scrollbar hide */
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -345,4 +354,32 @@ body {
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Horizontal scroll section */
+.horizontal-scroll-section {
+  will-change: transform;
+}
+
+/* Text reveal animation */
+@keyframes text-reveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(20px);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+.text-reveal {
+  animation: text-reveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Smooth card transitions */
+.project-card {
+  will-change: transform, opacity;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
