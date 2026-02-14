@@ -240,7 +240,7 @@ export function ShowcaseSlider() {
         <section
             ref={sectionRef}
             id="portfolio"
-            className="relative bg-black"
+            className="relative bg-black py-10 md:pb-22"
         >
             <div className="font-bold text-6xl text-white mt-5 mb-8 ml-20">Showcase</div>
             {/* Ambient background effects */}
