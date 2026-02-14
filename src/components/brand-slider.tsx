@@ -1,6 +1,11 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const brandImages = [
     { src: "/brand1.png", alt: "Brand 1" },
@@ -27,8 +32,31 @@ const brandImages = [
 ];
 
 export function BrandSlider() {
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(
+                sectionRef.current,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse",
+                    },
+                }
+            );
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section className="relative bg-[#0a0a0a] py-16 lg:py-24 overflow-hidden">
+        <section ref={sectionRef} className="relative bg-[#141414] py-10 lg:py-10 overflow-hidden">
             {/* Subtle top/bottom fade */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/3 to-transparent pointer-events-none" />
 
@@ -42,9 +70,9 @@ export function BrandSlider() {
             {/* Marquee container */}
             <div className="relative">
                 {/* Left fade */}
-                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#141414] to-transparent z-10 pointer-events-none" />
                 {/* Right fade */}
-                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#141414] to-transparent z-10 pointer-events-none" />
 
                 {/* Scrolling track — 21 brands × 2 sets for seamless loop */}
                 <div className="overflow-hidden">
@@ -56,7 +84,7 @@ export function BrandSlider() {
                         {brandImages.map((brand, i) => (
                             <div
                                 key={`a-${i}`}
-                                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center w-[140px] h-[90px] md:w-[180px] md:h-[110px] rounded-xl border border-white/8 bg-white/[0.03] backdrop-blur-sm p-4 md:p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
+                                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center w-[140px] h-[90px] md:w-[180px] md:h-[110px] p-4 md:p-5"
                             >
                                 <Image
                                     src={brand.src}
@@ -72,7 +100,7 @@ export function BrandSlider() {
                         {brandImages.map((brand, i) => (
                             <div
                                 key={`b-${i}`}
-                                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center w-[140px] h-[90px] md:w-[180px] md:h-[110px] rounded-xl border border-white/8 bg-white/[0.03] backdrop-blur-sm p-4 md:p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
+                                className="flex-shrink-0 mx-4 md:mx-6 flex items-center justify-center w-[140px] h-[90px] md:w-[180px] md:h-[110px] p-4 md:p-5"
                             >
                                 <Image
                                     src={brand.src}

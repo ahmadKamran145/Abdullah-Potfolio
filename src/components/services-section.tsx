@@ -47,14 +47,15 @@ export function Services() {
 
             gsap.fromTo(
                 cardsRef.current,
-                { y: 80, opacity: 0, scale: 0.9 },
+                { y: 80, opacity: 0, scale: 0.85, rotateX: 15 },
                 {
                     y: 0,
                     opacity: 1,
                     scale: 1,
-                    duration: 1,
-                    stagger: 0.15,
-                    ease: "power3.out",
+                    rotateX: 0,
+                    duration: 1.2,
+                    stagger: 0.1,
+                    ease: "back.out(1.2)",
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: "top 75%",
