@@ -242,6 +242,7 @@ export function ShowcaseSlider() {
             id="portfolio"
             className="relative bg-black"
         >
+            <div className="font-bold text-6xl text-white mt-5 mb-8 ml-20">Showcase</div>
             {/* Ambient background effects */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-r from-purple-900/10 to-transparent rounded-full blur-[150px]" />
