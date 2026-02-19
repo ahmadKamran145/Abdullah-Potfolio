@@ -10,45 +10,52 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
     {
         id: 1,
-        video: "/slider6.mp4",
-        title: "Creative Direction",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705309-75732545-IMG_1206.MP4",
+        title: "FOLk Studio",
         tags: ["Rebranding", "Social Media", "Production"],
         categories: ["Food", "Creatives", "Campaign"],
     },
     {
         id: 2,
-        video: "/slider2.mp4",
-        title: "Hico: Velvet Dreams",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705313-855195921-IMG_1308.MP4",
+        title: "Visuals",
         tags: ["Branding", "UI/UX", "Social Media"],
         categories: ["Creatives", "Website"],
     },
     {
         id: 3,
-        video: "/slider3.mp4",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705314-408216909-IMG_1358.MP4",
         title: "Scent & Stories",
         tags: ["Production", "Photography", "Rebranding"],
         categories: ["Lifestyle", "Campaign"],
     },
     {
         id: 4,
-        video: "/slider4.mp4",
-        title: "Harmony Visual",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705314-154237697-IMG_1360.MP4",
+        title: "Zero Lifestyle",
         tags: ["Social Media", "Production", "Branding"],
         categories: ["Music", "Creatives"],
     },
     {
         id: 5,
-        video: "/slider5.mp4",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705314-354956398-IMG_1361.MP4",
         title: "Midnight Vibe",
         tags: ["Rebranding", "UI/UX", "Production"],
         categories: ["Fashion", "Campaign"],
     },
     {
         id: 6,
-        video: "/slider.mp4",
-        title: "Zero Lifestyle",
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705315-552436702-IMG_1680.MP4",
+        title: "Hico: Velvet Dreams",
         tags: ["Branding", "Social Media", "Photography"],
         categories: ["Product", "Commercial"],
+    },
+    {
+        id: 7,
+        video: "https://looperin-store.s3.us-east-2.amazonaws.com/videos/1771525705315-934684422-IMG_1683.MP4",
+        title: "Urban Stories",
+        tags: ["Production", "Branding", "Social Media"],
+        categories: ["Lifestyle", "Creatives"],
     },
 ];
 
@@ -82,8 +89,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     return (
         <div
             ref={cardRef}
-            className="project-card flex-shrink-0 relative group"
-            style={{ width: "350px" }}
+            className="project-card flex-shrink-0 relative group w-[260px] md:w-[350px]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -117,16 +123,15 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                         e.stopPropagation();
                         setIsMuted(!isMuted);
                     }}
-                    className="absolute bottom-4 right-4 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    className="absolute bottom-4 right-4 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
                 >
                     {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                 </button>
             </div>
 
             {/* Card info below video */}
-            <div className="mt-5 px-1">
-                {/* Tags row */}
-                <h3 className="text-white text-3xl font-bold font-class tracking-tight">
+            <div className="mt-3 md:mt-5 px-1">
+                <h3 className="text-white text-xl md:text-3xl font-bold font-class tracking-tight">
                     {project.title}
                 </h3>
             </div>
@@ -240,9 +245,9 @@ export function ShowcaseSlider() {
         <section
             ref={sectionRef}
             id="portfolio"
-            className="relative bg-black py-10 md:pb-22"
+            className="relative bg-black py-6 md:py-10 md:pb-22"
         >
-            <div className="font-bold text-6xl text-white mt-5 mb-8 ml-20">Showcase</div>
+            <div className="font-bold text-3xl md:text-6xl text-white mt-3 md:mt-5 mb-4 md:mb-8 ml-6 md:ml-20">Showcase</div>
             {/* Ambient background effects */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-r from-purple-900/10 to-transparent rounded-full blur-[150px]" />
@@ -255,8 +260,8 @@ export function ShowcaseSlider() {
                     {/* Scrolling Cards Area */}
                     <div
                         ref={cardsContainerRef}
-                        className="flex items-end gap-8"
-                        style={{ paddingLeft: "calc(50vw - 175px)", paddingRight: "calc(50vw - 175px)" }}
+                        className="flex items-end gap-4 md:gap-8"
+                        style={{ paddingLeft: "calc(50vw - 130px)", paddingRight: "calc(50vw - 130px)" }}
                     >
                         {projects.map((project, index) => (
                             <ProjectCard key={project.id} project={project} index={index} />
@@ -265,7 +270,7 @@ export function ShowcaseSlider() {
                 </div>
 
                 {/* Edge fades */}
-                <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
+                <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
             </div>
         </section>
     );

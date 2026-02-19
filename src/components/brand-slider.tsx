@@ -57,30 +57,22 @@ export function BrandSlider() {
 
     return (
         <section ref={sectionRef} className="relative bg-[#141414] py-10 lg:py-10 overflow-hidden">
-            {/* Subtle top/bottom fade */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/3 to-transparent pointer-events-none" />
-
-            {/* Section header */}
             <div className="relative z-10 mx-auto max-w-[1440px] px-4 md:px-[64px] mb-12">
                 <p className="text-center text-sm font-medium uppercase tracking-widest bg-gradient-to-r from-[#658aff] to-[#a855f7] bg-clip-text text-transparent">
                     Trusted By Leading Brands
                 </p>
             </div>
 
-            {/* Marquee container */}
             <div className="relative">
-                {/* Left fade */}
                 <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#141414] to-transparent z-10 pointer-events-none" />
-                {/* Right fade */}
                 <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#141414] to-transparent z-10 pointer-events-none" />
 
-                {/* Scrolling track — 21 brands × 2 sets for seamless loop */}
                 <div className="overflow-hidden">
                     <div
                         className="flex animate-marquee"
                         style={{ width: "max-content" }}
                     >
-                        {/* First set — all 21 brands */}
                         {brandImages.map((brand, i) => (
                             <div
                                 key={`a-${i}`}
@@ -96,7 +88,6 @@ export function BrandSlider() {
                                 />
                             </div>
                         ))}
-                        {/* Duplicate set — all 21 brands again for seamless infinite loop */}
                         {brandImages.map((brand, i) => (
                             <div
                                 key={`b-${i}`}
